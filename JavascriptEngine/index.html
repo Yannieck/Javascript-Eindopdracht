@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <main>
+            <script type="text/javascript" src="./utilities.js"></script>
+            <script type="text/javascript" src="./enemy.js"></script>
+            <script type="text/javascript" src="./map.js"></script>
+            <script type="text/javascript" src="./player.js"></script>
+            <script type="text/javascript" src="./ray.js"></script>
+            <script type="text/javascript" src="./mainview.js"></script>
+            <script type="text/javascript" src="./script.js"></script>
+            <div id="fovSlider">
+                <input type="range" id="slider" min="20" , max="100" value="60" />
+                <p id="sliderValue">10</p>
+            </div>
+            <script type="text/javascript">
+                let txt = document.getElementById("sliderValue");
+                let slider = document.getElementById("slider");
+                txt.innerText = slider.value;
+
+                slider.onchange = function () {
+                    txt.innerText = slider.value;
+                };
+            </script>
+        </main>
+    </body>
+</html>
