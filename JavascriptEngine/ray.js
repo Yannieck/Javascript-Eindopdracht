@@ -3,7 +3,7 @@ class Ray {
         this.angle = angle;
         this.origin = origin;
         this.hit = hit;
-        this.object = object
+        this.object = object;
 
         //Displays if the ray hit a vertical or horizontal wall
         this.vertical = vertical;

@@ -110,7 +110,7 @@ class FirstPersonView {
         );
     }
 
-    getAnglesFromEnemys() {
+    drawEnemys() {
         //Loop through each enemy
         this.enemys.forEach((enemy) => {
             //Calculate the offset between the enemy and player
@@ -137,26 +137,30 @@ class FirstPersonView {
                 let deltaAngle = angle - minAngle;
 
                 //Map this bound from the angle to the screen
-                let mappedAngle = map(
+                let enemyScreenX = map(
                     degrees(deltaAngle),
                     0,
                     Utilities.FOV,
                     0,
                     Utilities.SCREEN_W
                 );
-                
+
                 //Scale the enemy according to the distance
                 const distance = sqrt(dx * dx + dy * dy);
                 const size = ((enemy.size * 8) / distance) * 277;
 
-                //Display the enemy
-                image(
-                    enemyImg,
-                    mappedAngle - size / 2,
-                    Utilities.SCREEN_H / 2 - size / 2,
-                    size,
-                    size
-                );
+                const wall = this.getClosestRayHit(angle);
+
+                if (distance < wall.distance) {
+                    //Display the enemy
+                    image(
+                        enemyImg,
+                        enemyScreenX - size / 2,
+                        Utilities.SCREEN_H / 2 - size / 2,
+                        size,
+                        size
+                    );
+                }
             }
         });
     }
@@ -200,6 +204,11 @@ class FirstPersonView {
                 ray.angle,
                 PLAYER.angle
             );
+
+            const wave = sin(millis() / 100) * 10 - 10;
+            const h_offset = keyIsDown(32) ? wave : 0;
+            // const h_offset = this.player.speed != 0 ? wave : 0;
+
             // Calculate the wall height
             const wallHeight = ((Utilities.CELL_SIZE * 4) / distance) * 277;
 
@@ -211,7 +220,7 @@ class FirstPersonView {
             );
             rect(
                 i * Utilities.SLICE_W,
-                Utilities.SCREEN_H / 2 - wallHeight / 2,
+                Utilities.SCREEN_H / 2 - wallHeight / 2 + h_offset,
                 Utilities.SLICE_W,
                 wallHeight
             );
@@ -220,21 +229,21 @@ class FirstPersonView {
             fill(Utilities.COLORS.floor);
             rect(
                 i * Utilities.SLICE_W,
-                Utilities.SCREEN_H / 2 + wallHeight / 2,
+                Utilities.SCREEN_H / 2 + wallHeight / 2 + h_offset,
                 Utilities.SLICE_W,
-                Utilities.SCREEN_H / 2 - wallHeight / 2
+                Utilities.SCREEN_H / 2 - wallHeight / 2 - h_offset
             );
 
-            //Draw the ceiling
+            // Draw the ceiling
             fill(Utilities.COLORS.ceiling);
             rect(
                 i * Utilities.SLICE_W,
                 0,
                 Utilities.SLICE_W,
-                Utilities.SCREEN_H / 2 - wallHeight / 2
+                Utilities.SCREEN_H / 2 - wallHeight / 2 + h_offset
             );
         });
 
-        this.getAnglesFromEnemys();
+        this.drawEnemys();
     }
 }

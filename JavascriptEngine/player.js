@@ -22,38 +22,38 @@ class Player {
     updatePlayer() {
         //Rotate camera
         if (keyIsDown(65)) {
-            this.angle -= (TWO_PI / 180);
+            this.angle -= (TWO_PI / 180) * Utilities.ROTATION_SPEED;
         } else if (keyIsDown(68)) {
-            this.angle += (TWO_PI / 180);
+            this.angle += (TWO_PI / 180) * Utilities.ROTATION_SPEED;
         }
 
-        this.angle %= TWO_PI
+        this.angle %= TWO_PI;
 
         //Update the player looking direction
         this.updatePlayerNormals();
 
         //Get the points at the end of a ray casted from the player, forwards and backwards
         //If these points are in a wall, stop them from moving in that direction
-        let roundedForwardPos = createVector(
+        let forwardMapPos = createVector(
             floor((this.x + this.forward.x) / Utilities.CELL_SIZE),
             floor((this.y + this.forward.y) / Utilities.CELL_SIZE)
         );
 
-        let roundedBackPos = createVector(
+        let backMapPos = createVector(
             floor((this.x + this.back.x) / Utilities.CELL_SIZE),
             floor((this.y + this.back.y) / Utilities.CELL_SIZE)
         );
 
         let forwardIsInWall =
-            Utilities.MAP_BITS[roundedForwardPos.y][roundedForwardPos.x];
+            Utilities.MAP_BITS[forwardMapPos.y][forwardMapPos.x];
         let backwardIsInWall =
-            Utilities.MAP_BITS[roundedBackPos.y][roundedBackPos.x];
+            Utilities.MAP_BITS[backMapPos.y][backMapPos.x];
 
         //Get keyboard inputs
         if (keyIsDown(87) && !forwardIsInWall) {
-            this.speed = 2;
+            this.speed = Utilities.PLAYER_SPEED;
         } else if (keyIsDown(83) && !backwardIsInWall) {
-            this.speed = -2;
+            this.speed = -Utilities.PLAYER_SPEED;
         } else {
             this.speed = 0;
         }

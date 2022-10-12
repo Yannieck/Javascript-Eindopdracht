@@ -6,6 +6,7 @@ let enemyImg;
 
 function preload() {
     enemyImg = loadImage("https://i.imgur.com/jtyrAXY.png");
+    weaponImg = loadImage("https://i.imgur.com/VtgrfjQ.png");
 }
 
 function setup() {
@@ -38,4 +39,20 @@ function draw() {
 
     //Update the player position and rotation
     PLAYER.updatePlayer();
+
+    stroke(255);
+    line(
+        Utilities.SCREEN_W / 2,
+        Utilities.SCREEN_H / 2 + 10,
+        Utilities.SCREEN_W / 2,
+        Utilities.SCREEN_H / 2 - 10
+    );
+    line(
+        Utilities.SCREEN_W / 2 + 10,
+        Utilities.SCREEN_H / 2,
+        Utilities.SCREEN_W / 2 - 10,
+        Utilities.SCREEN_H / 2
+    );
+    
+    image(weaponImg, Utilities.SCREEN_W / 2 - 187, Utilities.SCREEN_H - 200, 300, 300);
 }

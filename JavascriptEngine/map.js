@@ -72,6 +72,5 @@ class Map {
             (player.y + player.forward.y) * this.scale
         );
         strokeWeight(1);
-
     }
 }

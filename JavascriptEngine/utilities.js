@@ -10,6 +10,10 @@ class Utilities {
     static SCREEN_RES = this.SCREEN_W / 8;
     static SLICE_W = this.SCREEN_W / this.SCREEN_RES;
 
+    //Movement
+    static PLAYER_SPEED = 3;
+    static ROTATION_SPEED = 1;
+
     //Size of each block
     static CELL_SIZE = 64;
 
@@ -19,7 +23,7 @@ class Utilities {
     //Colors object
     static COLORS = {
         floor: "#d52b1e",
-        ceiling: "#ffffff",
+        ceiling: "#ff00ff",
         wall: "#012aa6",
         wallDark: "#0a2a8c",
         rays: "#ffa600",
