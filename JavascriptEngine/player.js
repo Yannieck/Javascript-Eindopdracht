@@ -21,11 +21,11 @@ class Player {
 
     updatePlayer() {
         //Rotate camera
-        if (keyIsDown(65)) {
-            this.angle -= (TWO_PI / 180) * Utilities.ROTATION_SPEED;
-        } else if (keyIsDown(68)) {
-            this.angle += (TWO_PI / 180) * Utilities.ROTATION_SPEED;
-        }
+        // if (keyIsDown(65)) {
+        //     this.angle -= (TWO_PI / 180) * Utilities.ROTATION_SPEED;
+        // } else if (keyIsDown(68)) {
+        //     this.angle += (TWO_PI / 180) * Utilities.ROTATION_SPEED;
+        // }
 
         this.angle %= TWO_PI;
 

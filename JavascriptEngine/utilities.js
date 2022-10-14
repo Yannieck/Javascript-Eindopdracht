@@ -12,7 +12,7 @@ class Utilities {
 
     //Movement
     static PLAYER_SPEED = 3;
-    static ROTATION_SPEED = 1;
+    static ROTATION_SPEED = .35;
 
     //Size of each block
     static CELL_SIZE = 64;

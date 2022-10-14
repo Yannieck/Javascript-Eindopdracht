@@ -205,9 +205,9 @@ class FirstPersonView {
                 PLAYER.angle
             );
 
-            const wave = sin(millis() / 100) * 10 - 10;
-            const h_offset = keyIsDown(32) ? wave : 0;
-            // const h_offset = this.player.speed != 0 ? wave : 0;
+            const wave = sin(millis() / 80) * 8 + 5;
+            // const h_offset = keyIsDown(32) ? wave : 0;
+            const h_offset = this.player.speed != 0 ? wave : 0;
 
             // Calculate the wall height
             const wallHeight = ((Utilities.CELL_SIZE * 4) / distance) * 277;

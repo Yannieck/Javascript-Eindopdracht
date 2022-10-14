@@ -4,6 +4,8 @@ const MAP = new Map(0, 0, Utilities.MAP_SCALE);
 const FPV = new FirstPersonView(PLAYER, ENEMYS);
 let enemyImg;
 
+var canvas = document.getElementById("defaultCanvas0");
+
 function preload() {
     enemyImg = loadImage("https://i.imgur.com/jtyrAXY.png");
     weaponImg = loadImage("https://i.imgur.com/VtgrfjQ.png");
@@ -53,6 +55,19 @@ function draw() {
         Utilities.SCREEN_W / 2 - 10,
         Utilities.SCREEN_H / 2
     );
-    
-    image(weaponImg, Utilities.SCREEN_W / 2 - 187, Utilities.SCREEN_H - 200, 300, 300);
+
+    image(
+        weaponImg,
+        Utilities.SCREEN_W / 2 - 187,
+        Utilities.SCREEN_H - 200,
+        300,
+        300
+    );
 }
+
+document.addEventListener("mousemove", (e) => {
+    PLAYER.angle += radians(e.movementX) * Utilities.ROTATION_SPEED;
+});
+document.body.onclick = function () {
+    canvas.requestPointerLock();
+};
