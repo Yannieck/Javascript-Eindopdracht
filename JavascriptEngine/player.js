@@ -20,15 +20,6 @@ class Player {
     }
 
     updatePlayer() {
-        //Rotate camera
-        // if (keyIsDown(65)) {
-        //     this.angle -= (TWO_PI / 180) * Utilities.ROTATION_SPEED;
-        // } else if (keyIsDown(68)) {
-        //     this.angle += (TWO_PI / 180) * Utilities.ROTATION_SPEED;
-        // }
-
-        this.angle %= TWO_PI;
-
         //Update the player looking direction
         this.updatePlayerNormals();
 
@@ -72,11 +63,14 @@ class Player {
             let dAngle = atan2(dy, dx);
 
             if (abs(dAngle - this.angle) < radians(Utilities.SHOOT_W)) {
+                let wallDist = RayCaster.getClosestRayHit(this, this.angle);
                 let d = dist(this.x, this.y, enemy.x, enemy.y);
-
-                if (d < closestDist) {
-                    closestDist = d;
-                    closestEnemy = i;
+                
+                if (d < wallDist.distance) {
+                    if (d < closestDist) {
+                        closestDist = d;
+                        closestEnemy = i;
+                    }
                 }
             }
         });
@@ -84,8 +78,5 @@ class Player {
         if (closestEnemy >= 0) {
             ENEMYS.splice(closestEnemy, 1);
         }
-    }
-
-    checkEnemyCollision() {
     }
 }

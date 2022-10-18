@@ -1,7 +1,7 @@
 const PLAYER = new Player();
 const MAP = new Map(0, 0, Utilities.MAP_SCALE);
 
-const FPV = new RayCaster(PLAYER, ENEMYS);
+const FPV = new Renderer(PLAYER, ENEMYS);
 
 var canvas = document.getElementById("defaultCanvas0");
 
@@ -17,7 +17,7 @@ function draw() {
     Utilities.FOV = document.getElementById("slider").value;
 
     //Get every ray every frame
-    const RAYS = FPV.getAllClosestRays();
+    const RAYS = RayCaster.getAllClosestRays(PLAYER);
 
     //Update the main FP view
     FPV.renderScene(RAYS);
@@ -27,7 +27,7 @@ function draw() {
         MAP.updateRays(RAYS);
         MAP.renderMinimap(RAYS, PLAYER, ENEMYS);
     }
-    
+
     //Update the player position and rotation
     PLAYER.updatePlayer();
 
