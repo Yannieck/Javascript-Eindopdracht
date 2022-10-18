@@ -46,8 +46,7 @@ class Player {
 
         let forwardIsInWall =
             Utilities.MAP_BITS[forwardMapPos.y][forwardMapPos.x];
-        let backwardIsInWall =
-            Utilities.MAP_BITS[backMapPos.y][backMapPos.x];
+        let backwardIsInWall = Utilities.MAP_BITS[backMapPos.y][backMapPos.x];
 
         //Get keyboard inputs
         if (keyIsDown(87) && !forwardIsInWall) {
@@ -61,5 +60,32 @@ class Player {
         //Apply movement
         this.x += cos(this.angle) * this.speed;
         this.y += sin(this.angle) * this.speed;
+    }
+
+    shoot() {
+        let closestEnemy = -1;
+        let closestDist = Infinity;
+
+        ENEMYS.forEach((enemy, i) => {
+            let dx = enemy.x - this.x;
+            let dy = enemy.y - this.y;
+            let dAngle = atan2(dy, dx);
+
+            if (abs(dAngle - this.angle) < radians(Utilities.SHOOT_W)) {
+                let d = dist(this.x, this.y, enemy.x, enemy.y);
+
+                if (d < closestDist) {
+                    closestDist = d;
+                    closestEnemy = i;
+                }
+            }
+        });
+
+        if (closestEnemy >= 0) {
+            ENEMYS.splice(closestEnemy, 1);
+        }
+    }
+
+    checkEnemyCollision() {
     }
 }

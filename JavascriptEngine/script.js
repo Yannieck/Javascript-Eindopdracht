@@ -1,15 +1,9 @@
 const PLAYER = new Player();
 const MAP = new Map(0, 0, Utilities.MAP_SCALE);
 
-const FPV = new FirstPersonView(PLAYER, ENEMYS);
-let enemyImg;
+const FPV = new RayCaster(PLAYER, ENEMYS);
 
 var canvas = document.getElementById("defaultCanvas0");
-
-function preload() {
-    enemyImg = loadImage("https://i.imgur.com/jtyrAXY.png");
-    weaponImg = loadImage("https://i.imgur.com/VtgrfjQ.png");
-}
 
 function setup() {
     //Instantiate a canvas the size of the properties defined in Utilities
@@ -33,12 +27,7 @@ function draw() {
         MAP.updateRays(RAYS);
         MAP.renderMinimap(RAYS, PLAYER, ENEMYS);
     }
-
-    // ENEMYS.forEach((enemy) => {
-    //     enemy.updateEnemy();
-    // });
-    // ENEMYS[0].updateEnemy();
-
+    
     //Update the player position and rotation
     PLAYER.updatePlayer();
 
@@ -63,6 +52,10 @@ function draw() {
         300,
         300
     );
+}
+
+function mouseClicked() {
+    PLAYER.shoot();
 }
 
 document.addEventListener("mousemove", (e) => {

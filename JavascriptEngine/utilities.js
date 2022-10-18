@@ -20,6 +20,9 @@ class Utilities {
     //Field of view
     static FOV = 60;
 
+    //Horizontal shoot range (in degrees)
+    static SHOOT_W = 4;
+
     //Colors object
     static COLORS = {
         floor: "#d52b1e",
@@ -60,4 +63,14 @@ class Utilities {
         const diff = angle - playerAngle;
         return distance * cos(diff);
     }
+}
+
+let enemyImg;
+let flashImg;
+let weaponImg
+
+function preload() {
+    enemyImg = loadImage("https://i.imgur.com/jtyrAXY.png");
+    flashImg = loadImage("https://i.imgur.com/Uhc6dCg.gif");
+    weaponImg = loadImage("https://i.imgur.com/VtgrfjQ.png");
 }

@@ -1,4 +1,4 @@
-class FirstPersonView {
+class RayCaster {
     constructor(player, enemys) {
         this.player = player;
         this.enemys = enemys;
@@ -110,7 +110,7 @@ class FirstPersonView {
         );
     }
 
-    drawEnemys() {
+    drawEnemys(h_offset) {
         //Loop through each enemy
         this.enemys.forEach((enemy) => {
             //Calculate the offset between the enemy and player
@@ -156,7 +156,7 @@ class FirstPersonView {
                     image(
                         enemyImg,
                         enemyScreenX - size / 2,
-                        Utilities.SCREEN_H / 2 - size / 2,
+                        Utilities.SCREEN_H / 2 - size / 2 + h_offset,
                         size,
                         size
                     );
@@ -197,6 +197,9 @@ class FirstPersonView {
 
     //Render the rays in the main view
     renderScene(rays) {
+        const wave = sin(millis() / 80) * 7 + 5;
+        const h_offset = this.player.speed != 0 ? wave : 0;
+
         rays.forEach((ray, i) => {
             //Calculate the distance with the fixed fish eye
             const distance = Utilities.removeFisheyeFromDistance(
@@ -204,10 +207,6 @@ class FirstPersonView {
                 ray.angle,
                 PLAYER.angle
             );
-
-            const wave = sin(millis() / 80) * 8 + 5;
-            // const h_offset = keyIsDown(32) ? wave : 0;
-            const h_offset = this.player.speed != 0 ? wave : 0;
 
             // Calculate the wall height
             const wallHeight = ((Utilities.CELL_SIZE * 4) / distance) * 277;
@@ -244,6 +243,6 @@ class FirstPersonView {
             );
         });
 
-        this.drawEnemys();
+        this.drawEnemys(h_offset);
     }
 }
