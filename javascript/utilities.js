@@ -71,5 +71,6 @@ let weaponImg
 
 function preload() {
     enemyImg = loadImage("https://raw.githubusercontent.com/Yannieck/Javascript-Eindopdracht/main/assets/image_placeholder.png?token=GHSAT0AAAAAABYI6OL43URVIIRZV6LVBKRUY2QEJSA");
-    weaponImg = loadImage("https://raw.githubusercontent.com/Yannieck/Javascript-Eindopdracht/main/assets/weapon.png?token=GHSAT0AAAAAABYI6OL5RMVNSBND6REOQWICY2QEP3Q");
+    flashImg = loadImage("https://i.imgur.com/Uhc6dCg.gif");
+    weaponImg = loadImage("https://i.imgur.com/VtgrfjQ.png");
 }
