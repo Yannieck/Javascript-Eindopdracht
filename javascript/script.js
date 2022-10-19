@@ -3,8 +3,6 @@ const MAP = new Map(0, 0, Utilities.MAP_SCALE);
 
 const FPV = new Renderer(PLAYER, ENEMYS);
 
-var canvas = document.getElementById("defaultCanvas0");
-
 function setup() {
     //Instantiate a canvas the size of the properties defined in Utilities
     createCanvas(Utilities.SCREEN_W, Utilities.SCREEN_H);
@@ -54,9 +52,10 @@ function draw() {
     );
 }
 
-// function mouseClicked() {
-//     PLAYER.shoot();
-// }
+function mouseClicked() {
+    PLAYER.shoot();
+}
+var canvas = document.getElementById("defaultCanvas0");
 
 document.addEventListener("mousemove", (e) => {
     PLAYER.angle += radians(e.movementX) * Utilities.ROTATION_SPEED;
