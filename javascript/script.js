@@ -54,6 +54,7 @@ function draw() {
 
 function mouseClicked() {
     PLAYER.shoot();
+    // testSound.play();
 }
 var canvas = document.getElementById("defaultCanvas0");
 

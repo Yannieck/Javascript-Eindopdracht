@@ -12,7 +12,7 @@ class Utilities {
 
     //Movement
     static PLAYER_SPEED = 3;
-    static ROTATION_SPEED = .35;
+    static ROTATION_SPEED = 0.35;
 
     //Size of each block
     static CELL_SIZE = 64;
@@ -66,10 +66,12 @@ class Utilities {
 }
 
 let enemyImg;
-let flashImg;
-let weaponImg
+let weaponImg;
+let testSound;
 
 function preload() {
-    enemyImg = loadImage("https://raw.githubusercontent.com/Yannieck/Javascript-Eindopdracht/main/assets/enemy.png?token=GHSAT0AAAAAABYI6OL5EE4GAPV5KHLLXMHQY2QFF2Q");
-    weaponImg = loadImage("https://raw.githubusercontent.com/Yannieck/Javascript-Eindopdracht/main/assets/weapon.png?token=GHSAT0AAAAAABYI6OL4RPCHALV2CNWKH44UY2QE2NQ");
+    // testSound = loadSound("https://github.com/Yannieck/Javascript-Eindopdracht/blob/main/assets/sounds/dspistol.wav?raw=true");
+
+    enemyImg = loadImage("https://i.imgur.com/jtyrAXY.png");
+    weaponImg = loadImage("https://i.imgur.com/VtgrfjQ.png");
 }
