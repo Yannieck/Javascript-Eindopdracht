@@ -70,7 +70,7 @@ let flashImg;
 let weaponImg
 
 function preload() {
-    enemyImg = loadImage("https://i.imgur.com/jtyrAXY.png");
+    enemyImg = loadImage("https://raw.githubusercontent.com/Yannieck/Javascript-Eindopdracht/main/assets/image_placeholder.png?token=GHSAT0AAAAAABYI6OL43URVIIRZV6LVBKRUY2QEJSA");
     flashImg = loadImage("https://i.imgur.com/Uhc6dCg.gif");
     weaponImg = loadImage("https://i.imgur.com/VtgrfjQ.png");
 }
