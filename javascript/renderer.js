@@ -7,28 +7,52 @@ class Renderer {
     renderEnemys(h_offset) {
         //Loop through each enemy
         this.enemys.forEach((enemy, i) => {
+            //Calculate the angle between the player and enemy
+            let enemyPlayerAngle = atan2(
+                enemy.y - this.player.y,
+                enemy.x - this.player.x
+            );
+
             //Calculate the distance between the player and enemy
-            let d = dist(enemy.x, enemy.y, this.player.x, this.player.y);
+            let enemyPlayerDist = dist(
+                enemy.x,
+                enemy.y,
+                this.player.x,
+                this.player.y
+            );
 
             //Calculate the angle difference between the player and the enemy
             let angleDiff =
                 (cos(this.player.angle) * (enemy.x - this.player.x) +
                     sin(this.player.angle) * (enemy.y - this.player.y)) /
-                d;
+                enemyPlayerDist;
+
+            // if (keyIsDown(32)) {
+            //     console.log(i);
+            //     console.log(this.player.angle);
+            //     console.log(enemyPlayerAngle);
+            //     console.log(angleDiff);
+            //     console.log(cos(radians(Utilities.FOV / 2)));
+            //     console.log("--------------");
+            // }
 
             //Check if that angle difference is less then 5 degrees
-            if (angleDiff >= cos(radians(5))) {
-                //Subtract the left angle bound from the angle to get the angle offset
-                let deltaAngle = angle - minAngle;
+            if (angleDiff >= cos(radians(Utilities.FOV / 2))) {
+                let a = acos(angleDiff);
 
-                //Map this bound from the angle to the screen
+                let b = enemyPlayerAngle- this.player.angle;
+
+                // if (keyIsDown(32)) {
+                // console.log(degrees(a));
+                // }
                 let enemyScreenX = map(
-                    degrees(deltaAngle),
+                    a,
                     0,
-                    Utilities.FOV,
+                    radians(Utilities.FOV / 2),
                     0,
-                    Utilities.SCREEN_W
+                    -Utilities.SCREEN_W / 2
                 );
+
 
                 //Scale the enemy according to the distance
                 const distance = dist(
@@ -39,7 +63,10 @@ class Renderer {
                 );
                 const size = ((enemy.size * 8) / distance) * 277;
 
-                const wall = RayCaster.getClosestRayHit(this.player, angle);
+                const wall = RayCaster.getClosestRayHit(
+                    this.player,
+                    enemyPlayerAngle
+                );
 
                 if (distance < wall.distance) {
                     //Display the enemy

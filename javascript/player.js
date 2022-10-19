@@ -10,9 +10,13 @@ class Player {
 
     updatePlayerNormals() {
         this.forward = createVector(
-            cos(this.angle) * Player.SIZE * 2,
-            sin(this.angle) * Player.SIZE * 2
+            cos(this.angle) * Player.SIZE,
+            sin(this.angle) * Player.SIZE
         );
+        // this.right = createVector(
+        //     -sin(this.angle) * Player.SIZE,
+        //     cos(this.angle) * Player.SIZE
+        // );
         this.back = createVector(
             cos(this.angle + PI) * Player.SIZE,
             sin(this.angle + PI) * Player.SIZE
@@ -26,8 +30,8 @@ class Player {
         //Get the points at the end of a ray casted from the player, forwards and backwards
         //If these points are in a wall, stop them from moving in that direction
         let forwardMapPos = createVector(
-            floor((this.x + this.forward.x) / Utilities.CELL_SIZE),
-            floor((this.y + this.forward.y) / Utilities.CELL_SIZE)
+            floor((this.x + this.forward.x * 2) / Utilities.CELL_SIZE),
+            floor((this.y + this.forward.y * 2) / Utilities.CELL_SIZE)
         );
 
         let backMapPos = createVector(
@@ -65,7 +69,7 @@ class Player {
             if (abs(dAngle - this.angle) < radians(Utilities.SHOOT_W)) {
                 let wallDist = RayCaster.getClosestRayHit(this, this.angle);
                 let d = dist(this.x, this.y, enemy.x, enemy.y);
-                
+
                 if (d < wallDist.distance) {
                     if (d < closestDist) {
                         closestDist = d;

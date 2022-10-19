@@ -68,8 +68,8 @@ class Map {
         line(
             player.x * this.scale + this.posX,
             player.y * this.scale + this.posY,
-            (player.x + player.forward.x) * this.scale,
-            (player.y + player.forward.y) * this.scale
+            (player.x + player.forward.x * 2) * this.scale,
+            (player.y + player.forward.y * 2) * this.scale
         );
         strokeWeight(1);
     }

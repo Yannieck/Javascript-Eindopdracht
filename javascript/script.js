@@ -54,9 +54,9 @@ function draw() {
     );
 }
 
-function mouseClicked() {
-    PLAYER.shoot();
-}
+// function mouseClicked() {
+//     PLAYER.shoot();
+// }
 
 document.addEventListener("mousemove", (e) => {
     PLAYER.angle += radians(e.movementX) * Utilities.ROTATION_SPEED;
