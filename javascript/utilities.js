@@ -70,6 +70,6 @@ let flashImg;
 let weaponImg
 
 function preload() {
-    enemyImg = loadImage("https://raw.githubusercontent.com/Yannieck/Javascript-Eindopdracht/main/assets/image_placeholder.png?token=GHSAT0AAAAAABYI6OL43URVIIRZV6LVBKRUY2QEJSA");
+    enemyImg = loadImage("https://raw.githubusercontent.com/Yannieck/Javascript-Eindopdracht/main/assets/enemy.png?token=GHSAT0AAAAAABYI6OL5GAM6QOAAMB2NE4VQY2QE7JA");
     weaponImg = loadImage("https://raw.githubusercontent.com/Yannieck/Javascript-Eindopdracht/main/assets/weapon.png?token=GHSAT0AAAAAABYI6OL4RPCHALV2CNWKH44UY2QE2NQ");
 }
