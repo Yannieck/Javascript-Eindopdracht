@@ -7,52 +7,51 @@ class Renderer {
     renderEnemys(h_offset) {
         //Loop through each enemy
         this.enemys.forEach((enemy, i) => {
-            //Calculate the angle between the player and enemy
-            let enemyPlayerAngle = atan2(
-                enemy.y - this.player.y,
-                enemy.x - this.player.x
+            //Create a vector from the player to the enemy
+            let playerEnemyVector = createVector(
+                enemy.x - this.player.x,
+                enemy.y - this.player.y
             );
 
-            //Calculate the distance between the player and enemy
-            let enemyPlayerDist = dist(
-                enemy.x,
-                enemy.y,
-                this.player.x,
-                this.player.y
+            //Calculate the angle between the player and enemy
+            let playerEnemyAngle = atan2(
+                playerEnemyVector.y,
+                playerEnemyVector.x
             );
 
             //Calculate the angle difference between the player and the enemy
             let angleDiff =
                 (cos(this.player.angle) * (enemy.x - this.player.x) +
                     sin(this.player.angle) * (enemy.y - this.player.y)) /
-                enemyPlayerDist;
+                playerEnemyVector.mag();
 
-            // if (keyIsDown(32)) {
-            //     console.log(i);
-            //     console.log(this.player.angle);
-            //     console.log(enemyPlayerAngle);
-            //     console.log(angleDiff);
-            //     console.log(cos(radians(Utilities.FOV / 2)));
-            //     console.log("--------------");
-            // }
-
-            //Check if that angle difference is less then 5 degrees
+            //Check if that angle difference is within the FOV
             if (angleDiff >= cos(radians(Utilities.FOV / 2))) {
-                let a = acos(angleDiff);
-
-                let b = enemyPlayerAngle- this.player.angle;
-
-                // if (keyIsDown(32)) {
-                // console.log(degrees(a));
-                // }
+                //Map the difference between the playerangle and enemy angle to the distance to the screen
                 let enemyScreenX = map(
-                    a,
+                    acos(angleDiff),
                     0,
                     radians(Utilities.FOV / 2),
                     0,
-                    -Utilities.SCREEN_W / 2
+                    Utilities.SCREEN_W / 2
+                );
+                //This gives a value going from 1 to 0 to 1. This needs to be changed to -1 to 0 to 1
+
+                //Crossproduct will be negative when vector B is to the left of vector A
+                //and prositive when vector B is to the right of vector A
+                let crossProduct = p5.Vector.cross(
+                    playerEnemyVector,
+                    this.player.forward
                 );
 
+                //When the cross product is less then 0 (towards the left)
+                //Multiply with -1
+                if (crossProduct.z > 0) {
+                    enemyScreenX *= -1;
+                }
+
+                //Add half the screen width to center
+                enemyScreenX += Utilities.SCREEN_W / 2;
 
                 //Scale the enemy according to the distance
                 const distance = dist(
@@ -61,15 +60,18 @@ class Renderer {
                     enemy.x,
                     enemy.y
                 );
+
                 const size = ((enemy.size * 8) / distance) * 277;
 
+                //Check if there are any walls between the player and enemy
+                //If there are, dont draw the enemy
                 const wall = RayCaster.getClosestRayHit(
                     this.player,
-                    enemyPlayerAngle
+                    playerEnemyAngle
                 );
 
                 if (distance < wall.distance) {
-                    //Display the enemy
+                    //Draw the enemy
                     image(
                         enemyImg,
                         enemyScreenX - size / 2,

@@ -9,7 +9,7 @@ class Enemy {
 }
 
 var ENEMYS = [
-    // new Enemy(Utilities.CELL_SIZE * 1.5, Utilities.CELL_SIZE * 2.5, 10),
+    new Enemy(Utilities.CELL_SIZE * 1.5, Utilities.CELL_SIZE * 2.5, 10),
     new Enemy(Utilities.CELL_SIZE * 2.5, Utilities.CELL_SIZE * 1.5, 10),
-    // new Enemy(Utilities.CELL_SIZE * 3.5, Utilities.CELL_SIZE * 1.5, 10),
+    new Enemy(Utilities.CELL_SIZE * 3.5, Utilities.CELL_SIZE * 1.5, 10),
 ];
