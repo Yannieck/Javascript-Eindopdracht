@@ -7,17 +7,19 @@ function setup() {
     //Instantiate a canvas the size of the properties defined in Utilities
     createCanvas(Utilities.SCREEN_W, Utilities.SCREEN_H);
     PLAYER.updatePlayerNormals();
+    // music.loop();    
 }
 
 function draw() {
     background(0);
-    // requestPointerLock();
-    Utilities.FOV = document.getElementById("slider").value;
+    
+    //Set the volume to the volume slider
+    outputVolume(document.getElementById("slider").value / 100);
 
     //Get every ray every frame
     const RAYS = RayCaster.getAllClosestRays(PLAYER);
 
-    //Update the main FP view
+    //Update the main FP view  
     FPV.renderScene(RAYS);
 
     //Update and display the map when the map is enabled
@@ -54,13 +56,10 @@ function draw() {
 
 function mouseClicked() {
     PLAYER.shoot();
-    // testSound.play();
+    testSound.play();
+    document.getElementById("defaultCanvas0").requestPointerLock();
 }
-var canvas = document.getElementById("defaultCanvas0");
 
 document.addEventListener("mousemove", (e) => {
     PLAYER.angle += radians(e.movementX) * Utilities.ROTATION_SPEED;
 });
-document.body.onclick = function () {
-    canvas.requestPointerLock();
-};

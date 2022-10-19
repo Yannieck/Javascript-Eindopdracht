@@ -1,5 +1,6 @@
 class Player {
     static SIZE = 10;
+    kills = 0;
 
     constructor() {
         this.x = Utilities.CELL_SIZE * 1.5;
@@ -13,10 +14,6 @@ class Player {
             cos(this.angle) * Player.SIZE,
             sin(this.angle) * Player.SIZE
         );
-        // this.right = createVector(
-        //     -sin(this.angle) * Player.SIZE,
-        //     cos(this.angle) * Player.SIZE
-        // );
         this.back = createVector(
             cos(this.angle + PI) * Player.SIZE,
             sin(this.angle + PI) * Player.SIZE
@@ -62,14 +59,24 @@ class Player {
         let closestDist = Infinity;
 
         ENEMYS.forEach((enemy, i) => {
-            let dx = enemy.x - this.x;
-            let dy = enemy.y - this.y;
-            let dAngle = atan2(dy, dx);
+            //Create a vector from the player to the enemy
+            let playerEnemyVector = createVector(
+                enemy.x - this.x,
+                enemy.y - this.y
+            );
 
-            if (abs(dAngle - this.angle) < radians(Utilities.SHOOT_W)) {
+            //Calculate the angle difference between the player and the enemy
+            let angleDiff =
+                (cos(this.angle) * (enemy.x - this.x) +
+                    sin(this.angle) * (enemy.y - this.y)) /
+                playerEnemyVector.mag();
+
+            //Check if enemy is within horizontal shooting range
+            if (angleDiff >= cos(radians(Utilities.SHOOT_W / 2))) {
                 let wallDist = RayCaster.getClosestRayHit(this, this.angle);
                 let d = dist(this.x, this.y, enemy.x, enemy.y);
 
+                //Check if there is no wall blocking the line of sight
                 if (d < wallDist.distance) {
                     if (d < closestDist) {
                         closestDist = d;
@@ -81,6 +88,8 @@ class Player {
 
         if (closestEnemy >= 0) {
             ENEMYS.splice(closestEnemy, 1);
+            kills++;
+            enemyDeath.play();
         }
     }
 }

@@ -10,6 +10,8 @@ class Utilities {
     static SCREEN_RES = this.SCREEN_W / 8;
     static SLICE_W = this.SCREEN_W / this.SCREEN_RES;
 
+    static DIST_TO_CAMERA = 200; //277
+
     //Movement
     static PLAYER_SPEED = 3;
     static ROTATION_SPEED = 0.35;
@@ -21,14 +23,14 @@ class Utilities {
     static FOV = 60;
 
     //Horizontal shoot range (in degrees)
-    static SHOOT_W = 4;
+    static SHOOT_W = 8;
 
     //Colors object
     static COLORS = {
-        floor: "#d52b1e",
-        ceiling: "#ff00ff",
-        wall: "#012aa6",
-        wallDark: "#0a2a8c",
+        floor: "#686868",
+        ceiling: "#212121",
+        wall: "#0000BC",
+        wallDark: "#0000AB",
         rays: "#ffa600",
     };
 
@@ -68,10 +70,16 @@ class Utilities {
 let enemyImg;
 let weaponImg;
 let testSound;
+let enemyDeath;
+let music
 
 function preload() {
-    // testSound = loadSound("https://github.com/Yannieck/Javascript-Eindopdracht/blob/main/assets/sounds/dspistol.wav?raw=true");
+    testSound = loadSound("../assets/sounds/shoot.wav");
+    enemyDeath = loadSound("../assets/sounds/enemyDeath.wav");
 
-    enemyImg = loadImage("https://i.imgur.com/jtyrAXY.png");
-    weaponImg = loadImage("https://i.imgur.com/VtgrfjQ.png");
+    music = loadSound("../assets/sounds/music.wav");
+
+    enemyImg = loadImage("../assets/images/enemy.png");
+    weaponImg = loadImage("../assets/images/weapon.png");
 }
+
