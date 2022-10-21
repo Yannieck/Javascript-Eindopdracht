@@ -25,6 +25,15 @@ class Utilities {
     //Horizontal shoot range (in degrees)
     static SHOOT_W = 8;
 
+    //Keeps track of enemy spawns
+    static spawnedEnemys = 0;
+
+    //Amount of enemies needed to be defeated to complete the game
+    static enemyGoal = 10;
+
+    //Keeps track of the defeated enemies
+    static currentScore = 10;
+
     //Colors object
     static COLORS = {
         floor: "#686868",
@@ -50,6 +59,42 @@ class Utilities {
         [1, 1, 1, 1, 1, 1, 1],
     ];
 
+    //Make an array with all the spawnable spaces
+    static spawnableSpaces = [];
+
+    static generateSpawnableSpaces() {
+        for (let row = 0; row < this.MAP_BITS.length; row++) {
+            for (let col = 0; col < this.MAP_BITS[0].length; col++) {
+                if (this.MAP_BITS[row][col] == 0) {
+                    this.spawnableSpaces.push(createVector(col, row));
+                }
+            }
+        }
+    }
+
+    static millisToString(millis) {
+        //Turn the millis value into minutes and seconds
+        let secs = floor(millis / 1000) % 60;
+        let mins = floor(millis / 60000);
+        let mils = floor((millis - secs * 1000 - mins * 60000) / 10);
+
+        //Format the values to 2 digits (4 -> 04)
+        let secsFormatted = secs.toLocaleString("en-US", {
+            minimumIntegerDigits: 2,
+            useGrouping: false,
+        });
+        let minsFormatted = mins.toLocaleString("en-US", {
+            minimumIntegerDigits: 2,
+            useGrouping: false,
+        });
+        let millisFormatted = mils.toLocaleString("en-US", {
+            minimumIntegerDigits: 2,
+            useGrouping: false,
+        });
+
+        return `${minsFormatted}:${secsFormatted}.${millisFormatted}`;
+    }
+
     //Check if a coord is outside the map boundaries
     static isOutOfMapBounds(x, y) {
         return (
@@ -71,15 +116,12 @@ let enemyImg;
 let weaponImg;
 let testSound;
 let enemyDeath;
-let music
+let music;
 
 function preload() {
     testSound = loadSound("../assets/sounds/shoot.wav");
     enemyDeath = loadSound("../assets/sounds/enemyDeath.wav");
 
-    music = loadSound("../assets/sounds/music.wav");
-
     enemyImg = loadImage("../assets/images/enemy.png");
     weaponImg = loadImage("../assets/images/weapon.png");
 }
-

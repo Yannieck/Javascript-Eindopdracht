@@ -88,8 +88,8 @@ class Player {
 
         if (closestEnemy >= 0) {
             ENEMYS.splice(closestEnemy, 1);
-            kills++;
             enemyDeath.play();
+            this.kills++;
         }
     }
 }

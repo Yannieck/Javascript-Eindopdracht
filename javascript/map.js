@@ -73,4 +73,23 @@ class Map {
         );
         strokeWeight(1);
     }
+
+    spawnEnemies() {
+        if (
+            ENEMYS.length < 10 &&
+            Utilities.spawnedEnemys < Utilities.enemyGoal &&
+            Utilities.currentScore == 0
+        ) {
+            let rand = floor(random(Utilities.spawnableSpaces.length));
+            let pos = Utilities.spawnableSpaces[rand];
+
+            ENEMYS.push(
+                new Enemy(
+                    Utilities.CELL_SIZE * pos.x + Utilities.CELL_SIZE / 2,
+                    Utilities.CELL_SIZE * pos.y + Utilities.CELL_SIZE / 2
+                )
+            );
+            Utilities.spawnedEnemys++;
+        }
+    }
 }

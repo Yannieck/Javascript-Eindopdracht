@@ -61,7 +61,8 @@ class Renderer {
                     enemy.y
                 );
 
-                const size = ((enemy.size * 8) / distance) * Utilities.DIST_TO_CAMERA;
+                const size =
+                    ((enemy.size * 8) / distance) * Utilities.DIST_TO_CAMERA;
 
                 //Check if there are any walls between the player and enemy
                 //If there are, dont draw the enemy
@@ -98,7 +99,9 @@ class Renderer {
             );
 
             // Calculate the wall height
-            const wallHeight = ((Utilities.CELL_SIZE * 4) / distance) * Utilities.DIST_TO_CAMERA;
+            const wallHeight =
+                ((Utilities.CELL_SIZE * 4) / distance) *
+                Utilities.DIST_TO_CAMERA;
 
             //Draw the walls
             noStroke();
