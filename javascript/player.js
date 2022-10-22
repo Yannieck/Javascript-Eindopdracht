@@ -58,7 +58,7 @@ class Player {
         let closestEnemy = -1;
         let closestDist = Infinity;
 
-        ENEMYS.forEach((enemy, i) => {
+        Map.enemys.forEach((enemy, i) => {
             //Create a vector from the player to the enemy
             let playerEnemyVector = createVector(
                 enemy.x - this.x,
@@ -87,7 +87,7 @@ class Player {
         });
 
         if (closestEnemy >= 0) {
-            ENEMYS.splice(closestEnemy, 1);
+            Map.enemys.splice(closestEnemy, 1);
             enemyDeath.play();
             this.kills++;
         }

@@ -7,5 +7,3 @@ class Enemy {
         this.speed = 0;
     }
 }
-
-var ENEMYS = [];

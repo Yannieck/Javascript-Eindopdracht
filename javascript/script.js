@@ -1,8 +1,8 @@
 const PLAYER = new Player();
 
-const MAP = new Map(0, 0, Utilities.MAP_SCALE);
+const MINIMAP = new Minimap(0, 0, Utilities.MAP_SCALE);
 
-const FPV = new Renderer(PLAYER, ENEMYS);
+const MAP = new Map(PLAYER);
 
 let scores = [];
 
@@ -14,6 +14,7 @@ function setup() {
     createCanvas(Utilities.SCREEN_W, Utilities.SCREEN_H);
     PLAYER.updatePlayerNormals();
 
+    MAP.spawnEnemies();
     setInterval(MAP.spawnEnemies, 1000);
 
     Utilities.generateSpawnableSpaces();
@@ -35,12 +36,12 @@ function draw() {
         const RAYS = RayCaster.getAllClosestRays(PLAYER);
 
         //Update the main FP view
-        FPV.renderScene(RAYS);
+        MAP.renderScene(RAYS);
 
         //Update and display the map when the map is enabled
         if (Utilities.DISPLAY_MINIMAP) {
-            MAP.updateRays(RAYS);
-            MAP.renderMinimap(RAYS, PLAYER, ENEMYS);
+            MINIMAP.updateRays(RAYS);
+            MINIMAP.renderMinimap(RAYS, PLAYER, Map.enemys);
         }
 
         //Update the player position and rotation

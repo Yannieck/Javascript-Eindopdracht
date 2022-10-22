@@ -4,7 +4,7 @@ Startdocument van **Yannieck Blaauw**.
 Student number **4976207**.
 
 ## Omschrijving
-Dit is een spel geinspireerd door de orginele Wolvenstein 3D en DOOM. Het is een first person shooter. 
+Dit is een spel geinspireerd door de orginele Wolvenstein 3D en DOOM. Het is een first person shooter.
 
 ## Instalatie
 Voor het spelen van dit spel zal een lokale Python server nodig zijn.
@@ -17,6 +17,7 @@ Typ vervolgens het commando `py -m http.server`. Dit zal een server aanmaken.
 Ga vervolgens in de browser naar `localhost:8000`. Het spel zal vanzelf opstarten.
 
 ## Spelregels
+Het doel van het spel is om alle monsters binnen de tijd te verslaan. De tijd die hierover gedaan wordt is de score. De persoon met de laagste score zal bovenaan het scorebord staan.
 
 ## Controls
 Gebruik `W` en `S` om vooruit en achteruit te bewegen. gebruik de muis om rond te kijken.
