@@ -19,19 +19,6 @@
             <script type="text/javascript" src="./javascript/raycaster.js"></script>
             <script type="text/javascript" src="./javascript/renderer.js"></script>
             <script type="text/javascript" src="./javascript/script.js"></script>
-            <div id="fovSlider">
-                <input type="range" id="slider" min="0" max="100" value="50"/>
-                <p id="sliderValue">10</p>
-            </div>
-            <script type="text/javascript">
-                let txt = document.getElementById("sliderValue");
-                let slider = document.getElementById("slider");
-                txt.innerText = slider.value;
-
-                slider.onchange = function () {
-                    txt.innerText = slider.value;
-                };
-            </script>
         </main>
     </body>
 </html>

@@ -6,8 +6,8 @@ const FPV = new Renderer(PLAYER, ENEMYS);
 
 let scores = [];
 
-let restartBtn = null;
-let firstRun = false;
+let hasAddedScore = false;
+let startTime = 0;
 
 function setup() {
     //Instantiate a canvas the size of the properties defined in Utilities
@@ -21,13 +21,14 @@ function setup() {
 
 function draw() {
     if (PLAYER.kills >= Utilities.enemyGoal) {
-        if (Utilities.currentScore == 0) Utilities.currentScore = millis();
+        if (Utilities.currentScore == 0)
+            Utilities.currentScore = millis() - startTime;
     }
 
     background(0);
 
-    //Set the volume to the volume slider
-    outputVolume(document.getElementById("slider").value / 100);
+    //Set the volume
+    outputVolume(0.5);
 
     if (Utilities.currentScore == 0) {
         //Get every ray every frame
@@ -68,9 +69,18 @@ function draw() {
             300,
             300
         );
+
+        fill(255);
+        textAlign(CENTER);
+        textSize(24);
+        text(
+            "Score: " + Utilities.millisToString(millis() - startTime),
+            Utilities.SCREEN_W / 2,
+            50
+        );
     } else {
         //End or start of game screen
-        if (firstRun) {
+        if (Utilities.currentScore < 0) {
             //Start screen
             fill(150);
             textAlign(CENTER);
@@ -96,41 +106,57 @@ function draw() {
                 Utilities.SCREEN_H - 100
             );
         } else {
-            //If not the first run, then display the score
-            //Get out of the pointer lock
+            //"You won" screen
             document.exitPointerLock();
+
+            if (hasAddedScore == false && Utilities.currentScore > 0) {
+                scores.push(floor(Utilities.currentScore));
+                hasAddedScore = true;
+            }
 
             fill(255);
             textAlign(CENTER);
             noStroke();
             textSize(48);
-            text(
-                "YOU WON",
-                Utilities.SCREEN_W / 2,
-                Utilities.SCREEN_H / 2 - 20
-            );
+            text("YOU WON", Utilities.SCREEN_W / 2, 150);
             fill(150);
             textSize(24);
-            text(
-                "You eliminated all the enemies",
-                Utilities.SCREEN_W / 2,
-                Utilities.SCREEN_H / 2 + 30
-            );
+            text("You eliminated all the enemies", Utilities.SCREEN_W / 2, 190);
 
-            fill(255);
+            if (scores[0] == floor(Utilities.currentScore)) {
+                fill(255);
+                textSize(32);
+                text("NEW HIGH SCORE:", Utilities.SCREEN_W / 2, 275);
+            }
+
+            fill(190);
             textSize(32);
             text(
                 `Score: ` + Utilities.millisToString(Utilities.currentScore),
                 Utilities.SCREEN_W / 2,
-                Utilities.SCREEN_H / 2 + 100
+                310
             );
+
+            let scoresText = "";
+            for (let i = 0; i < 5; i++) {
+                if (i < scores.length) {
+                    scoresText += (i + 1).toString();
+                    scoresText += ". ";
+                    scoresText += Utilities.millisToString(scores[i]);
+                    scoresText += "\n";
+                }
+            }
+
+            fill(150);
+            textSize(32);
+            text(scoresText, Utilities.SCREEN_W / 2, 400);
 
             fill(150);
             textSize(24);
             text(
                 "Press [SPACE] to restart",
                 Utilities.SCREEN_W / 2,
-                Utilities.SCREEN_H - 100
+                Utilities.SCREEN_H - 50
             );
         }
     }
@@ -151,16 +177,16 @@ document.addEventListener("mousemove", (e) => {
 });
 
 function keyPressed() {
-    if (keyCode === 32 && Utilities.currentScore > 0) {
+    if (keyCode === 32 && Utilities.currentScore != 0) {
         restartGame();
     }
 }
 
 function restartGame() {
-    scores.push(Utilities.currentScore);
-    firstRun = false;
     document.getElementById("defaultCanvas0").requestPointerLock();
+    startTime = millis();
     PLAYER.kills = 0;
     Utilities.currentScore = 0;
     Utilities.spawnedEnemys = 0;
+    hasAddedScore = false;
 }

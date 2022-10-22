@@ -32,7 +32,7 @@ class Utilities {
     static enemyGoal = 10;
 
     //Keeps track of the defeated enemies
-    static currentScore = 10;
+    static currentScore = -1;
 
     //Colors object
     static COLORS = {
@@ -109,6 +109,11 @@ class Utilities {
     static removeFisheyeFromDistance(distance, angle, playerAngle) {
         const diff = angle - playerAngle;
         return distance * cos(diff);
+    }
+
+    static sortArrayByValue(array) {
+        let sortedArr = array.sort((a, b) => a - b);
+        return sortedArr;
     }
 }
 
