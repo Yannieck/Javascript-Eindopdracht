@@ -1,0 +1,65 @@
+@startuml
+
+Map --> Enemy
+Map --> Player
+Minimap --> Player
+Minimap --> Enemy
+Renderer --> Ray
+
+class Map {
+    + enemy
+    + player
+    + drawView()
+}
+
+class Minimap {
+    + player
+    + enemy
+    + drawMinimap()
+}
+
+class Enemy {
+    + x
+    + y
+}
+
+class Player {
+    + x
+    + y
+    + angle
+    + speed
+    + move()
+    + shoot()
+}
+
+class Renderer {
+    + rays
+    {static} getVerticalRayhits()
+    {static} getHorizontalRayhits()
+    {static} getClosestRay()
+    {static} getAllClosestRays()
+}
+
+class Ray {
+    + angle
+    + origin
+    + hitpoint
+}
+
+class Utilities {
+    {static} MAP_SCALE
+    {static} SCREEN_W
+    {static} SCREEN_H
+    {static} SCREEN_RES
+    {static} SLICE_W
+    {static} DIST_TO_CAMERA
+    {static} FOV
+    {static} SHOOT_W
+    {static} SPAWNEDENEMIES
+    {static} ENEMYGOAL
+    {static} currentScore
+    {static} COLORS
+    {static} MAP
+}
+
+@enduml

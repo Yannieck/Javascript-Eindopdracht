@@ -1,9 +1,8 @@
 class Ray {
-    constructor(angle = 0, origin, hit, object, vertical) {
+    constructor(angle = 0, origin, hit, vertical) {
         this.angle = angle;
         this.origin = origin;
         this.hit = hit;
-        this.object = object;
 
         //Displays if the ray hit a vertical or horizontal wall
         this.vertical = vertical;

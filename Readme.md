@@ -24,5 +24,7 @@ Gebruik `W` en `S` om vooruit en achteruit te bewegen. gebruik de muis om rond t
 Klik op de linkermuisknop om te schieten
 
 ## Klassendiagram
+![Klassendiagram](./classdiagram.png)
 
 ## Demo video
+[![Demo video](https://img.youtube.com/vi/U8LJuWLQmoI/0.jpg)](https://youtu.be/U8LJuWLQmoI)

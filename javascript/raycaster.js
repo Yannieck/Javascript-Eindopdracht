@@ -47,7 +47,6 @@ class RayCaster {
             angle,
             createVector(player.x, player.y),
             createVector(nextX, nextY),
-            "Wall",
             true
         );
     }
@@ -98,7 +97,6 @@ class RayCaster {
             angle,
             createVector(player.x, player.y),
             createVector(nextX, nextY),
-            "Wall",
             false
         );
     }
